@@ -74,6 +74,37 @@ export const App = () => {
           Add
         </button>
       </div>
+      <div className="joke-lists-container">
+        <div className="joke-list-container">
+          <h2 className="sam">
+            UnTold{" "}
+            <span className="untold-count">Count: {unToldJokes.length}</span>
+          </h2>
+          <ul>
+            {unToldJokes.map((joke) => {
+              return (
+                <li className="joke-list-item" key={joke.id}>
+                  <p className="joke-list-item-text">{joke.text}</p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="joke-list-container">
+          <h2 className="sam">
+            Told <span className="told-count">Count: {toldJokes.length}</span>
+          </h2>
+          <ul>
+            {toldJokes.map((joke) => {
+              return (
+                <li className="joke-list-item" key={joke.id}>
+                  <p className="joke-list-item-text">{joke.text}</p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };
