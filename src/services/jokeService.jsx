@@ -18,3 +18,20 @@ export const GetAllJokes = async () => {
   const results = await response.json();
   return results;
 };
+
+export const ToggleJokeSubmission = async (id, transientState) => {
+  // options for a post request
+  const postOptions = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(transientState),
+  };
+
+  const response = await fetch(
+    `http://localhost:8088/jokes/${id}`,
+    postOptions
+  );
+  console.log("Joke updated");
+};

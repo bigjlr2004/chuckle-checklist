@@ -33,12 +33,12 @@
     {
       "id": "a3f5",
       "text": "What do you call cheese that is not yours; Nacho Cheese!",
-      "told": false
+      "told": true
     },
     {
       "id": "d276",
       "text": "I thought I was wrong once, but I was mistaken.",
-      "told": false
+      "told": true
     },
     {
       "id": "72ef",
@@ -48,17 +48,7 @@
     {
       "id": "7c22",
       "text": "Once there was a pot.",
-      "told": false
-    },
-    {
-      "id": "94c2",
-      "text": "Water is wet",
-      "told": false
-    },
-    {
-      "id": "723d",
-      "text": "Why are tomatoes are afraid of ketchup? They get squashed.",
-      "told": false
+      "told": true
     }
   ]
 }

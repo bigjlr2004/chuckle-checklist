@@ -42,6 +42,71 @@ export const App = () => {
     });
     setUserInput({ text: "", told: false });
   };
+  const HandleToggleJoke = (event) => {
+    event.preventDefault();
+    const jokeId = event.target.id; // Get the ID from the event
+    const jokeIndex = allJokes.findIndex(
+      (joke) => joke.id.toString() === jokeId
+    ); // Find the index of the joke
+
+    if (jokeIndex !== -1) {
+      // Check if the joke exists
+      // Toggle the 'told' property
+      allJokes[jokeIndex].told = !allJokes[jokeIndex].told;
+
+      // Prepare the updated joke data
+      const updatedJoke = {
+        ...allJokes[jokeIndex], // Spread the existing joke properties
+        told: allJokes[jokeIndex].told, // Update the 'told' property
+      };
+
+      // Make a PUT request to update the joke on the server
+      fetch(`http://localhost:8088/jokes/${jokeId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedJoke), // Send the updated joke data
+      })
+        .then((response) => response.json())
+        .then(() => {
+          // Fetch all jokes again and update the state
+          GetAllJokes().then((JokesArray) => {
+            setAllJokes(JokesArray);
+          });
+        })
+        .catch((error) => {
+          console.error("Error updating joke:", error);
+        });
+    }
+
+    // Reset user input
+    setUserInput({ text: "", told: false });
+  };
+  const HandleDeleteJoke = (event) => {
+    event.preventDefault();
+    const jokeId = event.target.id; // Get the ID from the event
+
+    // Make a DELETE request to remove the joke from the server
+    fetch(`http://localhost:8088/jokes/${jokeId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          // If the response is successful, fetch all jokes again
+          return GetAllJokes(); // Return the promise
+        } else {
+          throw new Error("Failed to delete joke"); // Handle errors
+        }
+      })
+      .then((JokesArray) => {
+        // Update the state with the new jokes array
+        setAllJokes(JokesArray);
+      })
+      .catch((error) => {
+        console.error("Error deleting joke:", error);
+      });
+  };
 
   return (
     <div className="app-container">
@@ -85,6 +150,22 @@ export const App = () => {
               return (
                 <li className="joke-list-item" key={joke.id}>
                   <p className="joke-list-item-text">{joke.text}</p>
+                  <button
+                    className="joke-list-action-toggle"
+                    onClick={(event) => {
+                      HandleDeleteJoke(event);
+                    }}
+                  >
+                    <i className="fa-solid fa-trash" id={joke.id}></i>
+                  </button>
+                  <button
+                    className="joke-list-action-toggle"
+                    onClick={(event) => {
+                      HandleToggleJoke(event);
+                    }}
+                  >
+                    <i className="fa-regular fa-face-meh" id={joke.id} />
+                  </button>
                 </li>
               );
             })}
@@ -99,6 +180,22 @@ export const App = () => {
               return (
                 <li className="joke-list-item" key={joke.id}>
                   <p className="joke-list-item-text">{joke.text}</p>
+                  <button
+                    className="joke-list-action-toggle"
+                    onClick={(event) => {
+                      HandleDeleteJoke(event);
+                    }}
+                  >
+                    <i className="fa-solid fa-trash" id={joke.id}></i>
+                  </button>
+                  <button
+                    className="joke-list-action-toggle"
+                    onClick={(event) => {
+                      HandleToggleJoke(event);
+                    }}
+                  >
+                    <i className="fa-regular fa-face-meh" id={joke.id} />
+                  </button>
                 </li>
               );
             })}
