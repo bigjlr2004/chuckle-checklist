@@ -96,10 +96,11 @@ these styles and create your own styles and layout for the application.
 }
 
 /** Targets all h2s in the app. Intended for the "Add Joke", "Untold", and "Told" headers*/
-h2 {
+.sam {
   border: none;
   border-bottom: 3px solid var(--col-2);
   padding: 0.25rem 0;
+  font-size: 1.5rem;
 }
 
 /** Class for the container that wraps your input and button for adding a joke. */

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import { SaveJokeSubmission } from "./services/jokeService";
+import { GetAllJokes, SaveJokeSubmission } from "./services/jokeService";
 import stevePic from "./assets/steve.png";
 
 export const App = () => {
@@ -8,6 +8,23 @@ export const App = () => {
     text: "",
     told: false,
   });
+
+  const [allJokes, setAllJokes] = useState([]);
+  useEffect(() => {
+    GetAllJokes().then((JokesArray) => {
+      setAllJokes(JokesArray);
+    });
+  }, []);
+  const [toldJokes, setToldJokes] = useState([]);
+  const [unToldJokes, setUnToldJokes] = useState([]);
+
+  useEffect(() => {
+    const filteredToldJokes = allJokes.filter((joke) => joke.told);
+    setToldJokes(filteredToldJokes);
+    const filteredUnToldJokes = allJokes.filter((joke) => !joke.told);
+    setUnToldJokes(filteredUnToldJokes);
+  }, [allJokes]);
+
   const updateItem = (evt) => {
     const copy = { ...userInput };
     copy.text = evt.target.value;
@@ -20,6 +37,9 @@ export const App = () => {
     } else {
       alert(`Please complete the form`);
     }
+    GetAllJokes().then((JokesArray) => {
+      setAllJokes(JokesArray);
+    });
     setUserInput({ text: "", told: false });
   };
 
@@ -30,8 +50,8 @@ export const App = () => {
           <img className="app-logo" src={stevePic} alt="Good job Steve" />
         </div>
         <h1 className="app-heading-text">Chuckle Checklist</h1>
-        <h2>Add Joke</h2>
       </div>
+      <h2 className="sam">Add Joke</h2>
       <div className="joke-add-form">
         <input
           value={userInput.text}
