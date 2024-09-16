@@ -1,0 +1,44 @@
+{
+  "jokes": [
+    {
+      "id": "1",
+      "text": "I went to buy some camo pants but couldn’t find any.",
+      "told": false
+    },
+    {
+      "id": "2",
+      "text": "I always find elevator jokes to be uplifting.",
+      "told": false
+    },
+    {
+      "id": "3",
+      "text": "Most people are shocked when they find out how bad I am as an electrician.",
+      "told": true
+    },
+    {
+      "id": "4",
+      "text": "I’ve had a perfectly wonderful evening, but this wasn’t it.",
+      "told": false
+    },
+    {
+      "id": "5",
+      "text": "I failed math so many times at school, I can’t even count",
+      "told": true
+    },
+    {
+      "id": "8068",
+      "text": "Don't trust atoms, they make up everything.",
+      "told": false
+    },
+    {
+      "id": "a3f5",
+      "text": "What do you call cheese that is not yours; Nacho Cheese!",
+      "told": false
+    },
+    {
+      "id": "d276",
+      "text": "I thought I was wrong once, but I was mistaken.",
+      "told": false
+    }
+  ]
+}
